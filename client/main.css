@@ -1,4 +1,8 @@
+html,
 body {
-  padding: 10px;
-  font-family: sans-serif;
+    background: rgb(33, 46, 54);
+    background: linear-gradient(45deg, rgb(18, 31, 39) 30%, rgb(53, 66, 74));
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
