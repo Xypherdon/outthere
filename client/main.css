@@ -1,7 +1,6 @@
 html,
 body {
-    background: rgb(33, 46, 54);
-    background: linear-gradient(45deg, rgb(18, 31, 39) 30%, rgb(53, 66, 74));
+    background: linear-gradient(45deg, rgb(8, 21, 29), rgb(33, 46, 54));
     height: 100%;
     margin: 0;
     padding: 0;
