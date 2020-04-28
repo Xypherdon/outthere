@@ -1,10 +1,23 @@
 import { useCallback } from 'react';
 
-export const validateEmail = (email) => {
+export const validateEmail = (email, callback) => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-        return true;
+        Meteor.call('accounts.findUserByEmail', { email }, (error, result) => {
+            if (error) {
+                console.error('Error:', error);
+                callback(false);
+            } else {
+                console.log(result);
+                if (!result) {
+                    callback(true);
+                } else {
+                    callback(false);
+                }
+            }
+        });
+    } else {
+        callback(false);
     }
-    return false;
 };
 
 export const checkPasswords = (password1, password2) => {

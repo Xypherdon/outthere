@@ -69,4 +69,60 @@ export const classes = {
         backgroundColor: 'rgba(255, 255, 255, 0.04) ',
         width: '20%',
     },
+    error: {
+        color: 'red',
+    },
+    profileDiv: {
+        margin: '100px',
+        backgroundColor: 'rgba(255, 255, 255, 0.02) ',
+        borderRadius: '10px',
+        padding: '60px',
+        position: 'relative',
+        display: 'flex',
+    },
+    profileCard: {
+        backgroundColor: 'rgba(255, 255, 255, 0.04) ',
+        borderRadius: '10px',
+        display: 'block',
+        width: '30%',
+        minWidth: '150px',
+    },
+    profileCardActionArea: {
+        padding: '10px',
+    },
+    upperProfileCard: {
+        position: 'relative',
+    },
+    profileCardControls: {
+        width: '100%',
+        paddingTop: '2%',
+        paddingBottom: '2%',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        textAlign: 'center',
+        bottom: '0',
+        position: 'absolute',
+    },
+    profileCardContent: {
+        padding: '20px',
+    },
+    profileButton: {
+        marginLeft: '5px',
+        marginRight: '5px',
+    },
+    coverPhoto: {
+        margin: '-60px',
+        position: 'absolute',
+    },
+    coverPhotoStyle: {
+        margin: '-60px',
+        position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        width: '100%',
+        height: '450px',
+    },
+    artistName: {
+        zIndex: '1',
+        marginTop: '305px',
+        marginLeft: '30px',
+    },
 };

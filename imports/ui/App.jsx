@@ -11,7 +11,13 @@ import { Router, Switch, Route, Link, useParams } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { Register } from './Register';
 import { Login } from './Login';
-import { browserHistory } from '../routes/history';
+import { Profile } from './Profile';
+import { history } from '../routes/history';
+
+function ProfileChild(props) {
+    let { id } = useParams();
+    return <Profile id={id} classes={props.classes} />;
+}
 
 export const App = () => {
     // const classes = useStyles();
@@ -24,14 +30,21 @@ export const App = () => {
                     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
                 />
             </div>
-            <Router history={browserHistory}>
+            <Router history={history}>
                 <Switch>
                     <Route path="/login">
                         <Login classes={classes} />
                     </Route>
+
                     <Route path="/register">
                         <Register classes={classes} />
                     </Route>
+
+                    <Route
+                        path="/profile/:id"
+                        children={<ProfileChild classes={classes} />}
+                    />
+
                     <Route exact path="/">
                         <div style={classes.centered}>
                             <Typography variant="h5" color="textPrimary">

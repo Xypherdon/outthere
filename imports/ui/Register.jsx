@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { history } from '../routes/history';
+import { Redirect } from 'react-router-dom';
 import {
     validateEmail,
     checkPasswords,
@@ -16,14 +18,35 @@ export class Register extends React.Component {
             username: '',
             password: '-1',
             confirmPassword: '-1',
-            emailCorrect: true,
-            usernameCorrect: true,
-            passwordsMatch: true,
+            emailCorrect: '',
+            usernameCorrect: '',
+            passwordsMatch: '',
+            registerSuccesful: '',
         };
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        console.log(this.state);
+        if (prevState !== this.state) {
+            if (
+                this.state.emailCorrect === true &&
+                this.state.usernameCorrect === true &&
+                this.state.passwordsMatch === true
+            ) {
+                this.setState({ registerSuccesful: true });
+                createUser(
+                    this.state.email,
+                    this.state.username,
+                    this.state.password
+                );
+            }
+        }
+    }
+
     registerClicked = () => {
-        this.setState({ emailCorrect: validateEmail(this.state.email) });
+        validateEmail(this.state.email, (result) => {
+            this.setState({ emailCorrect: result });
+        });
 
         checkUsername(this.state.username, (result) => {
             this.setState({ usernameCorrect: result });
@@ -35,23 +58,10 @@ export class Register extends React.Component {
                 this.state.confirmPassword
             ),
         });
-
-        console.log(this.state);
-        if (
-            this.state.emailCorrect &&
-            this.state.usernameCorrect &&
-            this.state.passwordsMatch
-        ) {
-            createUser(
-                this.state.email,
-                this.state.username,
-                this.state.password
-            );
-        }
     };
 
     conditionalEmailTextField() {
-        if (this.state.emailCorrect) {
+        if (this.state.emailCorrect !== false) {
             return (
                 <TextField
                     style={this.props.classes.textField}
@@ -83,7 +93,7 @@ export class Register extends React.Component {
     }
 
     conditionalUsernameTextField() {
-        if (this.state.usernameCorrect) {
+        if (this.state.usernameCorrect !== false) {
             return (
                 <TextField
                     style={{
@@ -121,7 +131,7 @@ export class Register extends React.Component {
     }
 
     conditionalPasswordsTextField() {
-        if (this.state.passwordsMatch) {
+        if (this.state.passwordsMatch !== false) {
             return (
                 <React.Fragment>
                     <TextField
@@ -195,36 +205,45 @@ export class Register extends React.Component {
         }
     }
 
-    render() {
-        return (
-            <React.Fragment>
-                <Card
-                    elevation={10}
-                    style={{
-                        ...this.props.classes.centered,
-                        ...this.props.classes.card,
-                    }}
-                >
-                    {this.conditionalEmailTextField()}
-                    {this.conditionalUsernameTextField()}
-
-                    {this.conditionalPasswordsTextField()}
-
-                    <Button
-                        onClick={this.registerClicked}
+    registerRender() {
+        if (this.state.registerSuccesful !== true) {
+            return (
+                <React.Fragment>
+                    <Card
+                        elevation={10}
                         style={{
-                            ...this.props.classes.cardElement,
-                            ...this.props.classes.flashyButton,
+                            ...this.props.classes.centered,
+                            ...this.props.classes.card,
                         }}
                     >
-                        Register
-                    </Button>
-                    <br />
-                    <Button href="/login" style={{ fontSize: '12px' }}>
-                        Already have an account?
-                    </Button>
-                </Card>
-            </React.Fragment>
-        );
+                        {this.conditionalEmailTextField()}
+                        {this.conditionalUsernameTextField()}
+
+                        {this.conditionalPasswordsTextField()}
+
+                        <Button
+                            onClick={this.registerClicked}
+                            style={{
+                                ...this.props.classes.cardElement,
+                                ...this.props.classes.flashyButton,
+                            }}
+                        >
+                            Register
+                        </Button>
+                        <br />
+                        <Button href="/login" style={{ fontSize: '12px' }}>
+                            Already have an account?
+                        </Button>
+                    </Card>
+                </React.Fragment>
+            );
+        } else {
+            history.push('/register');
+            return <Redirect to={`/profile/${Meteor.userId()}`} />;
+        }
+    }
+
+    render() {
+        return this.registerRender();
     }
 }

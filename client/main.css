@@ -1,6 +1,8 @@
 html,
 body {
-    background: linear-gradient(45deg, rgb(8, 21, 29), rgb(33, 46, 54));
+    background: linear-gradient(45deg, rgb(11, 19, 24), rgb(37, 49, 59));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     height: 100%;
     margin: 0;
     padding: 0;
