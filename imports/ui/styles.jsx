@@ -105,6 +105,7 @@ export const classes = {
     },
     profileCardContent: {
         padding: '20px',
+        height: 'fit-content',
     },
     profileContentCard: {
         marginTop: '420px',
@@ -136,9 +137,22 @@ export const classes = {
     },
     list: {
         width: '500px',
+        margin: '25px',
+        height: '100%',
+    },
+
+    topList: {
+        marginTop: '10px',
+    },
+
+    bottomList: {
+        marginBottom: '25px',
+        width: '90%',
+        position: 'absolute',
+        bottom: '0',
     },
     drawer: {
-        backgroundColor: 'rgba(255, 255, 255, 0.04) ',
+        backdropFilter: 'blur(65px)',
     },
     mainDrawerMenuButton: {
         position: 'fixed',
@@ -148,3 +162,5 @@ export const classes = {
         top: '5px',
     },
 };
+
+export const useStyles = makeStyles(classes);

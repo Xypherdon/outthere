@@ -1,5 +1,5 @@
 import React from 'react';
-// import { useStyles } from './styles';
+import { useStyles } from './styles';
 import { classes } from './styles';
 import { darkTheme } from './themes';
 import { Button } from '@material-ui/core';
@@ -21,7 +21,7 @@ function ProfileChild(props) {
 }
 
 export const App = () => {
-    // const classes = useStyles();
+    const materialClasses = useStyles();
 
     return (
         <ThemeProvider theme={darkTheme}>
@@ -32,7 +32,7 @@ export const App = () => {
                 />
             </div>
 
-            <MainDrawer />
+            <MainDrawer classes={classes} materialClasses={materialClasses} />
 
             <Router history={history}>
                 <Switch>
