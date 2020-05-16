@@ -22,7 +22,7 @@ export class Profile extends React.Component {
                     image="https://upload.wikimedia.org/wikipedia/commons/2/20/Plini248_300x_RG.jpg"
                 />
                 <div style={this.props.classes.coverPhotoStyle}></div>
-                <Card elevation={24} style={this.props.classes.profileCard}>
+                <Card elevation={12} style={this.props.classes.profileCard}>
                     <div style={this.props.classes.upperProfileCard}>
                         <CardMedia
                             component="img"
@@ -68,6 +68,13 @@ export class Profile extends React.Component {
                 <Typography style={this.props.classes.artistName} variant="h2">
                     Plini
                 </Typography>
+                <Card
+                    elevation={12}
+                    style={this.props.classes.profileContentCard}
+                >
+                    {' '}
+                    Oy mate goodaye mate
+                </Card>
             </Card>
         );
     }

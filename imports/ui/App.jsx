@@ -11,6 +11,7 @@ import { Router, Switch, Route, Link, useParams } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { Register } from './Register';
 import { Login } from './Login';
+import { MainDrawer } from './MainDrawer.jsx';
 import { Profile } from './Profile';
 import { history } from '../routes/history';
 
@@ -30,6 +31,9 @@ export const App = () => {
                     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
                 />
             </div>
+
+            <MainDrawer />
+
             <Router history={history}>
                 <Switch>
                     <Route path="/login">

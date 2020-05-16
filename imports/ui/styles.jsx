@@ -74,6 +74,7 @@ export const classes = {
     },
     profileDiv: {
         margin: '100px',
+        // background: 'linear-gradient(0deg, #1c1c1c, #2b2b2b)',
         backgroundColor: 'rgba(255, 255, 255, 0.02) ',
         borderRadius: '10px',
         padding: '60px',
@@ -105,6 +106,14 @@ export const classes = {
     profileCardContent: {
         padding: '20px',
     },
+    profileContentCard: {
+        marginTop: '420px',
+        marginLeft: '-107px',
+        width: '67%',
+        padding: '25px',
+        borderRadius: '10px',
+        backgroundColor: 'rgba(255, 255, 255, 0.04) ',
+    },
     profileButton: {
         marginLeft: '5px',
         marginRight: '5px',
@@ -124,5 +133,18 @@ export const classes = {
         zIndex: '1',
         marginTop: '305px',
         marginLeft: '30px',
+    },
+    list: {
+        width: '500px',
+    },
+    drawer: {
+        backgroundColor: 'rgba(255, 255, 255, 0.04) ',
+    },
+    mainDrawerMenuButton: {
+        position: 'fixed',
+        height: '48px',
+        width: '48px',
+        left: '5px',
+        top: '5px',
     },
 };
