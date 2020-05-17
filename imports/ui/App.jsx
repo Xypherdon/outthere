@@ -7,7 +7,14 @@ import { Typography } from '@material-ui/core';
 import 'typeface-roboto';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import { Router, Switch, Route, Link, useParams } from 'react-router-dom';
+import {
+    Router,
+    Switch,
+    Route,
+    Link,
+    useParams,
+    Redirect,
+} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { Register } from './Register';
 import { Login } from './Login';
@@ -19,6 +26,33 @@ function ProfileChild(props) {
     let { id } = useParams();
     return <Profile id={id} classes={props.classes} />;
 }
+
+const conditionalRender = () => {
+    if (Meteor.user() === null) {
+        return (
+            <div style={classes.centered}>
+                <Typography variant="h5" color="textPrimary">
+                    Let's get you
+                </Typography>
+
+                <Typography
+                    style={classes.title}
+                    variant="h1"
+                    component="h2"
+                    color="primary"
+                >
+                    OutThere
+                </Typography>
+                <Button style={classes.flashyButton} href="/register">
+                    Register
+                </Button>
+                <Button href="/login">Already have an account?</Button>
+            </div>
+        );
+    } else {
+        return <Redirect to={`/profile/${Meteor.userId()}`} />;
+    }
+};
 
 export const App = () => {
     const materialClasses = useStyles();
@@ -50,29 +84,7 @@ export const App = () => {
                     />
 
                     <Route exact path="/">
-                        <div style={classes.centered}>
-                            <Typography variant="h5" color="textPrimary">
-                                Let's get you
-                            </Typography>
-
-                            <Typography
-                                style={classes.title}
-                                variant="h1"
-                                component="h2"
-                                color="primary"
-                            >
-                                OutThere
-                            </Typography>
-                            <Button
-                                style={classes.flashyButton}
-                                href="/register"
-                            >
-                                Register
-                            </Button>
-                            <Button href="/login">
-                                Already have an account?
-                            </Button>
-                        </div>
+                        {conditionalRender()}
                     </Route>
                 </Switch>
             </Router>

@@ -205,8 +205,8 @@ export class Register extends React.Component {
         }
     }
 
-    registerRender() {
-        if (this.state.registerSuccesful !== true) {
+    registerRender = () => {
+        if (Meteor.user() === null && this.state.registerSuccesful !== true) {
             return (
                 <React.Fragment>
                     <Card
@@ -241,7 +241,7 @@ export class Register extends React.Component {
             history.push('/register');
             return <Redirect to={`/profile/${Meteor.userId()}`} />;
         }
-    }
+    };
 
     render() {
         return this.registerRender();

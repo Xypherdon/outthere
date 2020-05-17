@@ -42,7 +42,7 @@ export class Login extends React.Component {
     };
 
     loginRender = () => {
-        if (this.state.loginSuccesful !== true) {
+        if (Meteor.user() === null && this.state.loginSuccesful !== true) {
             return (
                 <React.Fragment>
                     <Card

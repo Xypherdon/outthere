@@ -14,6 +14,8 @@ import ContactMailIcon from '@material-ui/icons/ContactMail';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LockIcon from '@material-ui/icons/Lock';
 import HelpIcon from '@material-ui/icons/Help';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export class MainDrawer extends React.Component {
     constructor(props) {
@@ -21,10 +23,6 @@ export class MainDrawer extends React.Component {
         this.state = {
             left: false,
         };
-    }
-
-    componentDidUpdate() {
-        console.log(this.state);
     }
 
     toggleDrawer = (open) => (event) => {
@@ -35,6 +33,113 @@ export class MainDrawer extends React.Component {
             return;
         }
         this.setState({ left: open });
+    };
+
+    logout = () => {
+        Meteor.logout();
+    };
+
+    conditionalRender = () => {
+        if (Meteor.user() === null) {
+            return (
+                <React.Fragment>
+                    <Typography
+                        style={{
+                            ...this.props.classes.title,
+                            marginLeft: '18px',
+                            marginTop: '10px',
+                        }}
+                        variant="subtitle1"
+                        color="textPrimary"
+                    >
+                        Not logged in
+                    </Typography>
+                    <List style={this.props.classes.bottomList}>
+                        <ListItem
+                            button
+                            component="a"
+                            href="/register"
+                            key="register"
+                        >
+                            <ListItemIcon>
+                                <AddCircleIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Create an account" />
+                        </ListItem>
+                        <ListItem
+                            button
+                            component="a"
+                            href="/login"
+                            key="login"
+                        >
+                            <ListItemIcon>
+                                <PersonIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Login" />
+                        </ListItem>
+                    </List>
+                </React.Fragment>
+            );
+        } else {
+            return (
+                <React.Fragment>
+                    <List style={this.props.classes.topList}>
+                        <ListItem button key="home">
+                            <ListItemIcon>
+                                <HomeIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Home" />
+                        </ListItem>
+                        <ListItem button key="profile">
+                            <ListItemIcon>
+                                <PersonIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Profile" />
+                        </ListItem>
+                    </List>
+                    <Divider />
+                    <List>
+                        <ListItem button key="account">
+                            <ListItemIcon>
+                                <ContactMailIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Account" />
+                        </ListItem>
+
+                        <ListItem button key="privacy">
+                            <ListItemIcon>
+                                <LockIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Privacy" />
+                        </ListItem>
+                        <ListItem button key="about">
+                            <ListItemIcon>
+                                <HelpIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="About" />
+                        </ListItem>
+                    </List>
+                    <List style={this.props.classes.bottomList}>
+                        <ListItem button key="settings">
+                            <ListItemIcon>
+                                <SettingsIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Settings" />
+                        </ListItem>
+                        <ListItem
+                            button
+                            onClick={this.logout.bind(this)}
+                            key="logout"
+                        >
+                            <ListItemIcon>
+                                <ExitToAppIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Logout" />
+                        </ListItem>
+                    </List>
+                </React.Fragment>
+            );
+        }
     };
 
     list = () => (
@@ -51,50 +156,7 @@ export class MainDrawer extends React.Component {
             >
                 OutThere
             </Typography>
-            <List style={this.props.classes.topList}>
-                <ListItem button key="home">
-                    <ListItemIcon>
-                        <HomeIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Home" />
-                </ListItem>
-                <ListItem button key="profile">
-                    <ListItemIcon>
-                        <PersonIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Profile" />
-                </ListItem>
-            </List>
-            <Divider />
-            <List>
-                <ListItem button key="account">
-                    <ListItemIcon>
-                        <ContactMailIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Account" />
-                </ListItem>
-
-                <ListItem button key="privacy">
-                    <ListItemIcon>
-                        <LockIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Privacy" />
-                </ListItem>
-                <ListItem button key="about">
-                    <ListItemIcon>
-                        <HelpIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="About" />
-                </ListItem>
-            </List>
-            <List style={this.props.classes.bottomList}>
-                <ListItem button key="settings">
-                    <ListItemIcon>
-                        <SettingsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Settings" />
-                </ListItem>
-            </List>
+            {this.conditionalRender()}
         </div>
     );
 

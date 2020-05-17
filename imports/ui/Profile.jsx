@@ -12,7 +12,7 @@ import {
 export class Profile extends React.Component {
     render() {
         return (
-            <Card elevation={1} style={this.props.classes.profileDiv}>
+            <Card elevation={6} style={this.props.classes.profileDiv}>
                 <CardMedia
                     component="img"
                     alt="Contemplative Reptile"
