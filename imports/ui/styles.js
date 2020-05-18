@@ -75,8 +75,7 @@ export const classes = {
     },
     profileContentCard: {
         marginTop: '420px',
-        marginLeft: '-107px',
-        width: '67%',
+        marginLeft: '30px',
         padding: '25px',
         borderRadius: '10px',
         backgroundColor: 'rgba(255, 255, 255, 0.04) ',
@@ -97,6 +96,7 @@ export const classes = {
         height: '450px',
     },
     artistName: {
+        position: 'absolute',
         zIndex: '1',
         marginTop: '305px',
         marginLeft: '30px',

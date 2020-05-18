@@ -16,6 +16,7 @@
     "meteor-node-stubs": "^1.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.1.2",
     "typeface-roboto": "0.0.75"
   },

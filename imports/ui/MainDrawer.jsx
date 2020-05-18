@@ -37,6 +37,7 @@ export class MainDrawer extends React.Component {
 
     logout = () => {
         Meteor.logout();
+        window.location.reload();
     };
 
     conditionalRender = () => {

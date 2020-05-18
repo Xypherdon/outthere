@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField, Card, Button, Typography } from '@material-ui/core';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { history } from '../routes/history';
 
 export class Login extends React.Component {

@@ -9,6 +9,7 @@ import {
     createUser,
 } from '../helpers/accounts';
 import { TextField, Card, Button } from '@material-ui/core';
+import { withTracker } from 'meteor/react-meteor-data';
 
 export class Register extends React.Component {
     constructor(props) {
@@ -26,7 +27,6 @@ export class Register extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log(this.state);
         if (prevState !== this.state) {
             if (
                 this.state.emailCorrect === true &&

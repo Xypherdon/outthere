@@ -19,12 +19,12 @@ import { createBrowserHistory } from 'history';
 import { Register } from './Register';
 import { Login } from './Login';
 import { MainDrawer } from './MainDrawer.jsx';
-import { Profile } from './Profile';
+import Profile from './Profile';
 import { history } from '../routes/history';
 
 function ProfileChild(props) {
-    let { id } = useParams();
-    return <Profile id={id} classes={props.classes} />;
+    let { userId } = useParams();
+    return <Profile userId={userId} classes={props.classes} />;
 }
 
 const conditionalRender = () => {
@@ -79,7 +79,7 @@ export const App = () => {
                     </Route>
 
                     <Route
-                        path="/profile/:id"
+                        path="/profile/:userId"
                         children={<ProfileChild classes={classes} />}
                     />
 

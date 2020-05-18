@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { Profiles } from '../api/profiles';
 
 export const validateEmail = (email, callback) => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
@@ -44,14 +45,28 @@ export const checkUsername = (username, callback) => {
             }
         }
     );
-
-    // if (!username || Accounts.findUserByUsername(username) !== null) {
-    //     return false;
-    // } else {
-    //     return true;
-    // }
 };
 
 export const createUser = (email, username, password) => {
-    Accounts.createUser({ email, username, password });
+    Accounts.createUser({ email, username, password }, (error) => {
+        if (!error) {
+            Meteor.call(
+                'accounts.findUserByUsername',
+                { username },
+                (error, result) => {
+                    if (error) {
+                        console.error('Error:', error);
+                    }
+                    Meteor.subscribe('profiles');
+
+                    Meteor.call('profiles.insert', {
+                        _id: result._id,
+                        name: username,
+                        artistName: username,
+                        description: 'No description yet',
+                    });
+                }
+            );
+        }
+    });
 };
